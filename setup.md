@@ -1,54 +1,25 @@
 ---
-title: Setup
+title: Lesson overview
 ---
 
-FIXME: Setup instructions live in this document. Please specify the tools and
-the data sets the Learner needs to have installed.
+## Learning goals for this lession
 
-## Data Sets
+In this lesson, you'll learn
 
-<!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
--->
-Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
-
-## Software Setup
-
-::::::::::::::::::::::::::::::::::::::: discussion
-
-### Details
-
-Setup for different systems can be presented in dropdown menus via a `solution`
-tag. They will join to this discussion block, so you can give a general overview
-of the software used in this lesson here and fill out the individual operating
-systems (and potentially add more, e.g. online setup) in the solutions blocks.
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::: solution
-
-### Windows
-
-Use PuTTY
-
-:::::::::::::::::::::::::
-
-:::::::::::::::: solution
-
-### MacOS
-
-Use Terminal.app
-
-:::::::::::::::::::::::::
+- how to handle data sets containing categorical data in R,  
+- how to visualize categorical data,  
+- how to calculate effect sizes, and 
+- how to test for a difference in proportions.  
 
 
-:::::::::::::::: solution
+## Prerequisites
 
-### Linux
+- Data handling and visualization using the `tidyverse` in R. We recommend  
+    - completing [this tutorial](https://www.ebi.ac.uk/training/online/courses/biostatistics-introduction/data-handling-and-visualisation/) (crash course, if you already have some experience in R)
+    - the carpentries [R for ecologists](https://datacarpentry.org/R-ecology-lesson/) (if you're starting from scratch)
+- Basics on statistical distributions (covered in [this lecture](https://sarahkaspar.github.io/biostatistics-course/)) 
+- Basics on hypothesis testing (covered in [this lesson](https://sarahkaspar.github.io/hypothesis-testing/))
 
-Use Terminal
+## Author
 
-:::::::::::::::::::::::::
-
+Dr. Sarah Kaspar (sarah.kaspar@embl.de)
