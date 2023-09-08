@@ -11,13 +11,13 @@
 carpentry: 'incubator'
 
 # Overall title for pages.
-title: 'Lesson Title' # FIXME
+title: 'Analyzing Categorical Data in R' # FIXME
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created: ~ # FIXME
 
 # Comma-separated list of keywords for the lesson
-keywords: 'software, data, lesson, The Carpentries' # FIXME
+keywords: 'statistics, data, lesson, software' # FIXME
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
@@ -33,7 +33,7 @@ source: 'https://github.com/carpentries/workbench-template-rmd' # FIXME
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'team@carpentries.org' # FIXME
+contact: 'sarah.kaspar@embl.de' # FIXME
 
 # Navigation ------------------------------------------------
 #
@@ -59,7 +59,13 @@ contact: 'team@carpentries.org' # FIXME
 
 # Order of episodes in your lesson
 episodes: 
-- introduction.Rmd
+- 01-introduction.Rmd
+- 02-effect-size.Rmd
+- 03-visualization.Rmd
+- 04-distributions.Rmd
+- 05-chisquare-test.Rmd
+- 06-power.Rmd
+- 07-biology.Rmd
 
 # Information for Learners
 learners: 
