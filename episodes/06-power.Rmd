@@ -39,8 +39,8 @@ In the lesson on hypothesis testing, we learned that the power depends on
 - the method we choose for testing, and
 - the sample size.
 
-In this lesson's example, the estimated association is not quite small ($6\%$ difference in proportions, or risk for disease more than twice as high for exposed mice), the significance level was the usual $5\%$, and a sample size of 200 doesn't seem small, either. Still, the effect is not significant.
-Does this mean that the Chi-square test is useless?
+In this lesson's example, the estimated association is not quite small ($6\%$ difference in proportions, or the risk for getting the disease is more than twice as high for exposed mice), the significance level was the usual $5\%$, and a sample size of 200 doesn't seem small, either. Still, the effect is not significant.
+Does this mean that the $\chi^2$-test is useless?
 
 They key here is the low overall probability of mice contracting the disease. Even though there were 200 mice, only a total of 14 out of them actually contracted the disease. And it's this low number of cases that limits the power of the study.
 
@@ -54,22 +54,84 @@ correct=FALSE)
 
 Intuitively, we still have 14 cases, and the question is how we'd expect them to distribute among the two groups (exposure and no exposure) by chance. 
 
-Thus, the power of the study is limited by the lowest counts in the table. We could also say that extreme frequencies (a low probability of one outcome always corresponds to a high probability of the other outcome) are unfavorable. 
+Thus, the power of the study is limited by the lowest counts in the table. We could also say that extreme frequencies (a low probability of one outcome always corresponds to a high probability of the other outcome) are unfavorable in terms of power. 
 To overcome the problem of a low number of cases, clinical studies are often conducted as **case-control studies**. In those, the same number of cases and controls are sampled by design. One can then compare the occurrence of certain risk factors (e.g. smoking, exposure, ...) between the two groups. 
 
 
 ## The Fisher test
 
-There is another test, called **Fisher test**, which is also used on contingency tables, and which tests exactly the same hypothesis as the chi-square test. 
-It doesn't sum up the differences between observed and expected counts, but instead calculates the probability of the observed data using a hypergeometric distribution. The hypergeometric distribution is similar to the multinomial distribution (except that it assumes draws *without* replacement) and gives exact probabilities for counts to fall into different categories (in this case the cells) under the assumption of independence.
+There is another test, called **Fisher test**, which is also used on contingency tables, and which tests exactly the same hypothesis as the $\chi^2$ test. 
+It doesn't sum up the differences between observed and expected counts, but instead calculates the probability of the observed data using a hypergeometric distribution. The hypergeometric distribution is similar to the multinomial distribution (except that it assumes draws *without* replacement) and gives exact probabilities for counts to fall into different categories (in this case the cells of the table) under the assumption of independence. See [here](https://online.stat.psu.edu/stat504/lesson/4/4.5) for more details on the Fisher test.
 
-If you do your research on which test to use (e.g. ask google), you'll stumble upon statements like "the Fisher test is more conservative", or "the $\chi^2$-test overestimates significance for small counts". What does this mean?
+::::::::: challenge
+# Apply the Fisher test
+Consider the table we've been looking at throughout this lesson.
+```{r echo = FALSE}
+mytable <- rbind(c(4,96), c(10,90))
+rownames(mytable) <- c("not exposed","exposed")
+colnames(mytable) <- c("diseased", "healthy")
+knitr::kable(mytable, align="cc")
+```
+
+Look up the help for `fisher.test`. Can you apply this test on the above data? How do you interpret the result? How does it compare to the outcome of the $\chi^2$ test?
+
+:::::::::::::::: solution
+```{r}
+fisher.test(rbind(c(4,96), c(10,90)))
+```
+
+The p-value for the Fisher test is higher than for the $\chi^2$ test (without correction), but almost identical to the $\chi^2$ test with Yates continuity correction (see below).
+The conclusion stays the same: Not significant at $\alpha=0.05$. 
+The `fisher.test` function also gives an odds ratio $\approx 0.37$. The part that I don't like about this output is that we have to guess which odds are being compared. If you look up the [measures for association](../02-effect-size.Rmd#measures-for-association), you'll notice that the calculated odds ratio for the same table was $\approx 2.7$. There we looked at the odds of getting the disease in case of exposure, relative to non-exposure, because this seemed natural. In the `fisher.test` function, the ratio was calculated the other way round. We could change this by switching the rows of the table:
+
+```{r}
+fisher.test(rbind(c(10,90),c(4,96)))
+```
+
+Alternatively, we can calculate the inverse of the result:
+
+```{r}
+1/0.3767
+```
+
+:::::::::::::::::
+
+:::::::::::::::::
+
+If you do your research on which test to use (e.g. ask google), you'll stumble upon statements like "the Fisher test is more conservative", or "the $\chi^2$-test overestimates significance for small counts". What does this mean? These statements both concern errors in hypothesis testing: If the Fisher test is conservative, this means that it is prone to failing to detect cases where an effect exists, i.e. it has a low power. On the other hand, if the $\chi^2$-test overestimates significance, then we have a problem with false positives.  
+In the next sections, we'll learn why p-values are a bit tricky to interpret for categorical data, and how this leads to discussions on when to use which test. 
 
 ## Significance for discrete data
 
-Let's recap what it means to choose a significance level of $\alpha=5\%$: It means we decide to reject the null hypothesis if the probability of seeing the observed data under the null is $\leq5\%$.
+Let's recap what it means to choose a significance level of $\alpha=5\%$: We decide to reject the null hypothesis if the probability of seeing the observed data under the null is $\leq5\%$.
 
-For continuous probability distributions like the t-distribution used in the t-test, this means that the probability of getting a p-value $<0.05$ is $5\%$, the probability of getting a p-value $<0.1$ is $10\%$, and so on.
+For continuous probability distributions like the t-distribution used in the t-test, this means that the probability of getting a p-value $<0.05$ is $5\%$, the probability of getting a p-value $<0.1$ is $10\%$, and so on. This is the definition of the p-value.
+
+So if you have $1000$ scenarios where nothing is going on and calculate a p-value using a one-sample t-test:
+```{r}
+set.seed(30)
+pvals <- rep(NA,1000)
+for(i in seq_along(pvals)){
+  pvals[i] <- t.test(rnorm(100), mu=0)$p.value
+}
+```
+
+Then in roughly $10\%$ of the cases, the p-value is below $0.1$:
+```{r}
+mean(pvals <0.1)
+```
+Then in roughly $20\%$ of the cases, the p-value is below $0.2$:
+```{r}
+mean(pvals <0.2)
+```
+
+If you make a histogram of the p-values, it will be roughly uniform:
+```{r}
+data.frame(pvals) %>% 
+  ggplot(aes(x=pvals))+
+  geom_histogram()
+```
+
 
 Unfortunately, for discrete data, this is not actually the case.
 

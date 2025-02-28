@@ -24,7 +24,7 @@ So far, we have learned that
 - We are usually interested in whether the two variables are associated.
 - If the variables are associated, they should not follow the probability rules for independence. 
 
-If we'd like to set up a hypothesis test for whether the two varilables are associated, then we have to formulate a null hypothesis, and then calculate the probability of the observed counts under this hypothesis.
+If we'd like to set up a hypothesis test for whether the two variables are associated, then we have to formulate a null hypothesis, and then calculate the probability of the observed counts under this hypothesis.
 
 Let's start with the null and alternative hypothesis.
 The **null hypothesis** is that the two variables are **independent**.  
@@ -158,8 +158,6 @@ The $\chi^2$ test is applicable to 2-dimensional contingency tables for testing 
 
 - It assumes that all observations are independent (one observation is an event that leads to the count in one cell being increased by 1). 
 - A rule of thumb is that the expected values of all cells in the contingency table should be >5 in at least 80% of the cells, and the expected cells should not be <1 in any of the cells. If this isn't the case, an alternative is Fisher's exact test (see [next episode](../06-power.Rmd)). 
-
-
 
 
 

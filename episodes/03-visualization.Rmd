@@ -64,7 +64,7 @@ Alternatively, you can run the plotting function on the *transposed* contingency
 mosaicplot(t(smokers))
 ```
 
-## Using the `ggplot2` 
+## Using `ggplot2` 
 
 We recommend using the `tidyverse` for data analysis in general, and in particular `ggplot2` for plotting. The above function is perfect for getting a quick overview on the data. For creating high-quality, customized graphics, `ggplot2` is usually the better choice. 
 

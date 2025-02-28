@@ -26,8 +26,9 @@ In this lesson, you'll learn
 
 - how to handle data sets containing categorical data in R,  
 - how to visualize categorical data,  
-- how to calculate effect sizes, and 
-- how to test for a difference in proportions.  
+- how to calculate effect sizes, 
+- how to test for a difference in proportions, and 
+- what to watch out for when applying these methods to biological data.
 
 ## Contingency tables
 
