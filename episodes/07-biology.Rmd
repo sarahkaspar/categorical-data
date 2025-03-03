@@ -221,6 +221,18 @@ rowSums(table3d, dims=2)
 
 :::::::::::::::::::::
 
+To avoid the danger of replicate that are confounded with a variable of interest, one can stratify by replicate. Stratify means: split the analysis by replicate, and then combine the results. 
+ 
+This is what the *Cochran-Mantel-Haenszel test* does. It calculates
+
+- a *common odds ratio* and 
+- a modified chi-square, 
+
+taking the replicates into account.
+
+
+
+
 ## Three-way interactions 
 
 Refer to Poisson models
