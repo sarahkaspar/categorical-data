@@ -26,8 +26,9 @@ In this lesson, you'll learn
 
 - how to handle data sets containing categorical data in R,  
 - how to visualize categorical data,  
-- how to calculate effect sizes, and 
-- how to test for a difference in proportions.  
+- how to calculate effect sizes, 
+- how to test for a difference in proportions, and 
+- what to watch out for when applying these methods to biological data.
 
 ## Contingency tables
 
@@ -67,7 +68,7 @@ One way of constructing a matrix is by using the function `rbind`, which "binds 
 
 For the above table, the function call looks like this:
 
-```r
+``` r
 mytable <- rbind(
   c(4,96),
   c(10,90)
@@ -75,7 +76,7 @@ mytable <- rbind(
 mytable
 ```
 
-```{.output}
+``` output
      [,1] [,2]
 [1,]    4   96
 [2,]   10   90
@@ -83,13 +84,13 @@ mytable
 
 Now, to remember which cell represents which observations, I find it useful to name the rows and columns:
 
-```r
+``` r
 rownames(mytable) <- c("non-exposed","exposed")
 colnames(mytable) <- c("diseased", "healthy")
 mytable
 ```
 
-```{.output}
+``` output
             diseased healthy
 non-exposed        4      96
 exposed           10      90

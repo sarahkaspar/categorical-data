@@ -24,7 +24,7 @@ So far, we have learned that
 - We are usually interested in whether the two variables are associated.
 - If the variables are associated, they should not follow the probability rules for independence. 
 
-If we'd like to set up a hypothesis test for whether the two varilables are associated, then we have to formulate a null hypothesis, and then calculate the probability of the observed counts under this hypothesis.
+If we'd like to set up a hypothesis test for whether the two variables are associated, then we have to formulate a null hypothesis, and then calculate the probability of the observed counts under this hypothesis.
 
 Let's start with the null and alternative hypothesis.
 The **null hypothesis** is that the two variables are **independent**.  
@@ -106,11 +106,11 @@ Let's look at some results in practice. The test itself is really just one line 
 
 
 
-```r
+``` r
 chisq.test(mytable, correct=FALSE)
 ```
 
-```{.output}
+``` output
 
 	Pearson's Chi-squared test
 
@@ -124,11 +124,11 @@ The output is also rather compact. We learn that R has calculated a value for $\
 
 We could also perform this calculation ourselves: 
 
-```r
+``` r
 pchisq(2.765,df=1, lower.tail=FALSE)
 ```
 
-```{.output}
+``` output
 [1] 0.09634669
 ```
 
@@ -151,21 +151,21 @@ Assign the output of the `chisq.test` function call to a variable, and apply the
 
 ::::::::::::::::::::: solution
 
-```r
+``` r
 mytest <- chisq.test(mytable, correct =FALSE)
 names(mytest)
 ```
 
-```{.output}
+``` output
 [1] "statistic" "parameter" "p.value"   "method"    "data.name" "observed" 
 [7] "expected"  "residuals" "stdres"   
 ```
 
-```r
+``` r
 mytest$expected
 ```
 
-```{.output}
+``` output
             diseased healthy
 non-exposed        7      93
 exposed            7      93
@@ -180,8 +180,6 @@ The $\chi^2$ test is applicable to 2-dimensional contingency tables for testing 
 
 - It assumes that all observations are independent (one observation is an event that leads to the count in one cell being increased by 1). 
 - A rule of thumb is that the expected values of all cells in the contingency table should be >5 in at least 80% of the cells, and the expected cells should not be <1 in any of the cells. If this isn't the case, an alternative is Fisher's exact test (see [next episode](../06-power.Rmd)). 
-
-
 
 
 

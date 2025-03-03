@@ -111,7 +111,7 @@ The above table comes from one of the first studies of the link between lung can
 ::::::::::::::::::: solution
 1. Construct a contingency table:
 
-```r
+``` r
 mytable <- rbind(
   c(688, 650),
   c(21, 59)
@@ -124,43 +124,43 @@ colnames(mytable) <- c("cases", "controls")
 2. Since this is a case control study, comparing the proportions of cancer patients between smokers and non-smokers makes no sense. They don't reflect the true probabilities of getting cancer, because by design the same number of cancer and no cancer subjects were included in the study. Instead, you can compare the proportions of smokers between the groups:
 
 
-```r
+``` r
 # 1. difference in proportions of smokers between cases and controls
 688/(21+688) - 650/(59+650)
 ```
 
-```{.output}
+``` output
 [1] 0.05359661
 ```
 
-```r
+``` r
 # ratio in proportions of smokers between cases and controls
 (688 / (21+688)) / (650 / (59+650))
 ```
 
-```{.output}
+``` output
 [1] 1.058462
 ```
 
-```r
+``` r
 # --> The proportion of smokers was 1.05 times higher for the cases
 
 # odds ratio
 (688 / 21) / (650/59)
 ```
 
-```{.output}
+``` output
 [1] 2.973773
 ```
 
-```r
+``` r
 # --> The odds for having smoked was 3 times higher in the cases group
 
 # log odds ratio
 log((688 / 21) / (650/59))
 ```
 
-```{.output}
+``` output
 [1] 1.089831
 ```
 

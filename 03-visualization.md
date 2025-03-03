@@ -18,7 +18,7 @@ exercises: 0
 
 
 
-```r
+``` r
 mytable <- rbind(c(4,96), c(10,90))
 rownames(mytable) <- c("not exposed","exposed")
 colnames(mytable) <- c("diseased", "healthy")
@@ -33,7 +33,7 @@ You now know how to calculate a measure for association from your table - great!
 There is a very simple way to do this using base R:
 
 
-```r
+``` r
 mosaicplot(mytable)
 ```
 
@@ -45,7 +45,7 @@ Note that the above mosaicplot is arranged such that the rectangles of one colum
 This might not always be how you want your plot to look. For example, consider the smokers example from [the previous episode](../02-effect-size.Rmd):
 
 
-```r
+``` r
 smokers <- rbind(
   c(688, 650),
   c(21, 59)
@@ -57,14 +57,14 @@ colnames(smokers) <- c("cases", "controls")
 
 If we apply the `mosaicplot` here, it'll look like this:
 
-```r
+``` r
 mosaicplot(smokers)
 ```
 
 <img src="fig/03-visualization-rendered-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 Using the argument `sort`, you can determine how the rectangles are aligned. You can align them by rows as follows: 
 
-```r
+``` r
 mosaicplot(smokers,
            sort = c(2,1))
 ```
@@ -72,13 +72,13 @@ mosaicplot(smokers,
 <img src="fig/03-visualization-rendered-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 Alternatively, you can run the plotting function on the *transposed* contingency table: 
 
-```r
+``` r
 mosaicplot(t(smokers))
 ```
 
 <img src="fig/03-visualization-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
-## Using the `ggplot2` 
+## Using `ggplot2` 
 
 We recommend using the `tidyverse` for data analysis in general, and in particular `ggplot2` for plotting. The above function is perfect for getting a quick overview on the data. For creating high-quality, customized graphics, `ggplot2` is usually the better choice. 
 
@@ -100,7 +100,7 @@ It would have three columns, according to the variables: `exposure` (exposed or 
 Let's code up the table in tidy format:
 
 
-```r
+``` r
 mice <- data.frame(
   exposure = c("yes", "yes", "no", "no"),
   outcome = c("diseased", "healthy", "diseased", "healthy"),
@@ -110,7 +110,7 @@ mice <- data.frame(
 mice
 ```
 
-```{.output}
+``` output
   exposure  outcome count
 1      yes diseased    10
 2      yes  healthy    90
@@ -121,7 +121,7 @@ mice
 This tidy table can be the input for the `ggplot` function. There are multiple ways and possible designs for mosaic plots using `ggplot2`. We'll demonstrate one here:
 
 
-```r
+``` r
 library(tidyverse)
 mice %>% 
   group_by(exposure) %>% 
