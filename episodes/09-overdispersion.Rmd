@@ -144,7 +144,7 @@ We try two ways:
 ### OLRE
 Fit linear model with random effect replicate observation level (OLRE). This is accounting for unmodeled, random variability at the observation level (replicate).
 
-```{r message=FAlSE, warning = FALSE}
+```{r message=FALSE, warning = FALSE}
 library(lme4)
 glmer.olre <- glmer(cbind(round,stretched) ~ condition  + (1|replicate) + (1|obs), 
       data= cells2F,
