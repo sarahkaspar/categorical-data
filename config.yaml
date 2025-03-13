@@ -66,6 +66,8 @@ episodes:
 - 05-chisquare-test.Rmd
 - 06-power.Rmd
 - 07-biology.Rmd
+- 08-modeling.Rmd
+- 09-overdispersion.Rmd
 
 # Information for Learners
 learners: 

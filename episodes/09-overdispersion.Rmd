@@ -1,0 +1,171 @@
+---
+title: "Overdispersed data"
+teaching: 20
+exercises: 0
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Provide a workflow for modeling count data with replicates.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+**NOTE: This episode is work in progress.**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+For the theory in this section, see [this study](https://peerj.com/articles/1114/). 
+
+```{r generate-example-data, echo=FALSE}
+set.seed(4)
+mysize <- 2
+ctrl_round <- rnbinom(3,size =mysize , mu = 10)
+ctrl_stretched <- rnbinom(3, size = mysize, mu=20)
+
+trt_round <- rnbinom(3, size = mysize, mu= 10)
+trt_stretched <- rnbinom(3, size=mysize, mu=20)
+
+cells2 <- data.frame(
+  condition = c(rep("ctrl",6), rep("trt",6)),
+  shape = rep(c(rep("round",3), rep("stretched",3)),2),
+  count = c(ctrl_round, ctrl_stretched, trt_round, trt_stretched),
+  replicate = rep(c("1","2","3"),4)
+)
+```
+
+We have new data of the same type, but unlike last time,  replicates are now taken on different days by three different technicians:
+
+```{r}
+cells2
+```
+
+We bring the data in a suitable format:
+```{r}
+cells2F <- cells2 %>% 
+  pivot_wider(
+    names_from = "shape",
+    values_from = "count"
+  ) %>% 
+  mutate(total = round + stretched) %>% 
+  mutate(fraction = round/total)
+
+cells2F$replicate <- factor(cells2F$replicate)
+
+cells2F
+```
+
+We add a variable called `obs` for "observation". Each fraction of round cells is an observation in this experiment. We'll need this variable for modeling variability.
+```{r}
+cells2F <- cells2F %>% 
+  mutate(obs = factor(1:n()))
+
+cells2F
+```
+
+
+Set up the model, as in last episode:
+
+```{r}
+model2 <- glm( cbind(round,stretched) ~ condition + replicate , 
+      data= cells2F,
+      family= binomial("logit")
+)
+
+summary(model2)
+```
+
+- We don't care about how the replicate impacts the fractions 
+- We assume the replicate doesn't change how the condition impacts the fractions 
+- It seems the fractions are different for control and treatment (in each replicate).
+
+We can now check for overdispersion:
+
+```{r}
+library(performance)
+check_overdispersion(model2)
+```
+The test clearly detects overdispersion.
+
+We can confirm visually:
+```{r}
+cells2F %>% 
+  ggplot(aes(x=condition, y=fraction))+
+  geom_point()
+```
+
+We should account for the overdispersion, to ensure the differences between control and treatment were not due to overdispersion. 
+
+## Including overdispersion in models
+
+We try two ways: 
+
+- observation-level random effects
+- Beta-binomial model
+
+
+### OLRE
+Fit linear model with random effect replicate observation level (OLRE). This is accounting for unmodeled, random variability at the observation level (replicate).
+
+```{r}
+library(lme4)
+glmer.olre <- glmer(cbind(round,stretched) ~ condition  + (1|replicate) + (1|obs), 
+      data= cells2F,
+      family= binomial("logit"))
+```
+
+This model has two random effects: 
+
+- `(1|replicate)` for the effect of the replicate on fractions. 
+- `(1|replicate:condition)`: observation-level random effect (fractions are allowed additional variability within the replicates)
+
+```{r}
+summary(glmer.olre)
+```
+
+The OLRE model estimates a variance for both random effects. Note that it attributes the majority of the variance to the observations, not the replicate.
+
+### Betabinomial model
+
+```{r}
+library(VGAM)
+
+glm.betabinom <- vglm(
+  cbind(round,stretched) ~ condition + (1|replicate), 
+  family = betabinomial, 
+  data = cells2F
+)
+```
+
+Model summary
+```{r}
+summary(glm.betabinom)
+```
+
+```{r}
+#library(glmmADMB)
+#model.betabinom <- glmmadmb(cbind(round,stretched) ~ condition + (1|replicate),
+#                            family="betabinomial",
+#                            data=cells2F)
+```
+
+
+```{r}
+library(glmmTMB)
+model.glmmTMB <- glmmTMB(cbind(round,stretched) ~ condition + (1|replicate),
+                            family=betabinomial(link = "logit"),
+                            data=cells2F)
+```
+```{r}
+summary(model.glmmTMB)
+```
+
+
+**Note:** Both models conclude that there is a difference in the fraction of round cells between control and treatment. However, in the data generation process, I used equal fractions.
