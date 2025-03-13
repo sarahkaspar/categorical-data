@@ -22,6 +22,12 @@
     <loc>https://carpentries.github.io/workbench-template-rmd/07-biology.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-rmd/08-modeling.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-rmd/09-overdispersion.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-rmd/404.html</loc>
   </url>
   <url>
@@ -59,6 +65,12 @@
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-rmd/instructor/07-biology.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/08-modeling.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/09-overdispersion.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-rmd/instructor/404.html</loc>
