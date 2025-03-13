@@ -6,13 +6,13 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-
+- Which models account for biological variability? 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Provide a workflow for modeling count data with replicates.
+- Provide a workflow for modeling count additional variability
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -22,10 +22,46 @@ exercises: 0
 
 For the theory in this section, see [this study](https://peerj.com/articles/1114/). 
 
+# The data for this episode
 
+I simulate data that has the same structure and covariates as in the last episode, but different counts: 
 
-We have new data of the same type, but unlike last time,  replicates are now taken on different days by three different technicians:
+- Again, we have `round` and `stretched` as possible cell shapes. 
+- We compare the fraction of round and stretched in a control and treatment `condition`. 
+- There are three replicates of the resulting $2\times 2$ table. 
+- I simulate negative binomial cell counts where 
+  - the probability of a cell being round is constant $p=1/3$ in all replicates and conditions. 
+  - I.e.: Neither treatment nor replicate have an effect. 
+  
+In biological terms, imagine we have new data of the same type, but unlike last time,  replicates are now taken on different days by three different technicians.
 
+:::::::::::::::: challenge
+# data generation
+
+::::::::: solution
+# click to expand
+
+``` r
+set.seed(4)
+mysize <- 2
+ctrl_round <- rnbinom(3,size =mysize , mu = 10)
+ctrl_stretched <- rnbinom(3, size = mysize, mu=20)
+
+trt_round <- rnbinom(3, size = mysize, mu= 10)
+trt_stretched <- rnbinom(3, size=mysize, mu=20)
+
+cells2 <- data.frame(
+  condition = c(rep("ctrl",6), rep("trt",6)),
+  shape = rep(c(rep("round",3), rep("stretched",3)),2),
+  count = c(ctrl_round, ctrl_stretched, trt_round, trt_stretched),
+  replicate = rep(c("1","2","3"),4)
+)
+```
+
+::::::::::::::::::
+::::::::::::::::::
+
+This is what the data looks like.
 
 ``` r
 cells2
@@ -96,17 +132,18 @@ cells2F
 6 trt       3             4        26    30   0.133  6    
 ```
 
+## Binomial model
 
-Set up the model, as in last episode:
+Start by setting up a model as in last episode:
 
 
 ``` r
-model2 <- glm( cbind(round,stretched) ~ condition + replicate , 
+binomial.model <- glm( cbind(round,stretched) ~ condition + replicate , 
       data= cells2F,
       family= binomial("logit")
 )
 
-summary(model2)
+summary(binomial.model)
 ```
 
 ``` output
@@ -133,25 +170,34 @@ AIC: 39.205
 Number of Fisher Scoring iterations: 4
 ```
 
-- We don't care about how the replicate impacts the fractions 
-- We assume the replicate doesn't change how the condition impacts the fractions 
-- It seems the fractions are different for control and treatment (in each replicate).
+Model assumptions: 
 
-We can now check for overdispersion:
+- This model allows the fraction to vary by replicate
+- We assume the replicate doesn't change how the condition impacts the fractions (otherwise there would be an interaction between `replicate` and `condition`). 
+- We don't assume variability on the observation level that goes beyond binomial variability. 
+
+Model finding: 
+
+- According to `binomial.model`, the fractions are significantly different for control and treatment (in each replicate). The Wald test for `conditiontrt` gives $p = 0.019$.
+
+
+We can now check for overdispersion, based on this model:
 
 
 ``` r
 library(performance)
-check_overdispersion(model2)
+check_overdispersion(binomial.model)
 ```
 
 ``` error
 Error: Package `DHARMa` required for this function to work.
   Please install it by running `install.packages("DHARMa")`.
 ```
-The test clearly detects overdispersion.
 
-We can confirm visually:
+This test doesn't find sufficient evidence for overdispersion -- which doesn't mean it's not present. Overdispersion in this case means that on top of the between-replicate variability, the fractions vary on the observation level. It is hard to detect, because a lot of the variability will be attributed to the `replicate` variable in the model.     
+
+
+We can check visually:
 
 ``` r
 cells2F %>% 
@@ -177,24 +223,6 @@ Fit linear model with random effect replicate observation level (OLRE). This is 
 
 ``` r
 library(lme4)
-```
-
-``` output
-Loading required package: Matrix
-```
-
-``` output
-
-Attaching package: 'Matrix'
-```
-
-``` output
-The following objects are masked from 'package:tidyr':
-
-    expand, pack, unpack
-```
-
-``` r
 glmer.olre <- glmer(cbind(round,stretched) ~ condition  + (1|replicate) + (1|obs), 
       data= cells2F,
       family= binomial("logit"))
@@ -242,79 +270,43 @@ Correlation of Fixed Effects:
 conditintrt -0.660
 ```
 
-The OLRE model estimates a variance for both random effects. Note that it attributes the majority of the variance to the observations, not the replicate.
+The OLRE model estimates a variance for both random effects. Note that it attributes the majority of the variance to the observations, not the replicate. This implies that obser
 
 ### Betabinomial model
 
+The betabinomial mode below 
+- models the replicate as a random effect (drawn from a normal distribution), 
+- and on top of that, it assumes that individual probabilities (on the observation level) are drawn from a betabinomial distribution. 
 
-``` r
-library(VGAM)
-```
+:::::::::::::::: testimonial
+# Citing from Harrison, 2015: 
 
-``` output
-Loading required package: stats4
-```
+"[...] instead of drawing observed counts directly from a Binomial
+distribution with mean $p_i$, we draw the Binomial probabilities from a beta distribution
+with parameters $a$ and $b$:
 
-``` output
-Loading required package: splines
-```
+$\text{beta}.p_i ~ \text{Beta}(a_i, b_i)$  
 
-``` r
-glm.betabinom <- vglm(
-  cbind(round,stretched) ~ condition + (1|replicate), 
-  family = betabinomial, 
-  data = cells2F
-)
-```
+$a_i = \frac{p_i}{\phi}$  
 
-``` warning
-Warning in Ops.factor(1, replicate): '|' not meaningful for factors
-```
+$h_i ~ \text{Binomial}(c_i, \text{beta}.p_i)$"
 
-``` error
-Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]): contrasts can be applied only to factors with 2 or more levels
-```
+:::::::::::::::::::::::
 
-Model summary
-
-``` r
-summary(glm.betabinom)
-```
-
-``` error
-Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'glm.betabinom' not found
-```
-
-
-``` r
-#library(glmmADMB)
-#model.betabinom <- glmmadmb(cbind(round,stretched) ~ condition + (1|replicate),
-#                            family="betabinomial",
-#                            data=cells2F)
-```
-
-
+Load required library:
 
 ``` r
 library(glmmTMB)
 ```
 
-``` output
-
-Attaching package: 'glmmTMB'
-```
-
-``` output
-The following objects are masked from 'package:VGAM':
-
-    bell, betabinomial, lognormal, skewnormal
-```
+Set up the model and look at the summary:
 
 ``` r
 model.glmmTMB <- glmmTMB(cbind(round,stretched) ~ condition + (1|replicate),
                             family=betabinomial(link = "logit"),
                             data=cells2F)
 ```
+
 
 ``` r
 summary(model.glmmTMB)
@@ -346,4 +338,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
-**Note:** Both models conclude that there is a difference in the fraction of round cells between control and treatment. However, in the data generation process, I used equal fractions.
+**Finding** Both models conclude that there is no difference in the fraction of round cells between control and treatment. Accordingly, in the data generation process, I used equal fractions.
+None of the model is perfect in telling where the variability is coming from. They both attribute some of the variability to the replicate, which was not how the data was generated. 
+
+
+### Note
+We just have three replicates of $2\times 2$ tables, and model variability as coming from two sources: replicate and observation. It is hard for any model / software to tell apart the effect of treatment, the observation-level variability, and the replicate-level variability.
+
