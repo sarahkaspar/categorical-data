@@ -245,8 +245,8 @@ Generalized linear mixed model fit by maximum likelihood (Laplace
 Formula: cbind(round, stretched) ~ condition + (1 | replicate) + (1 |      obs)
    Data: cells2F
 
-     AIC      BIC   logLik deviance df.resid 
-    43.4     42.5    -17.7     35.4        2 
+      AIC       BIC    logLik -2*log(L)  df.resid 
+     43.4      42.5     -17.7      35.4         2 
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
