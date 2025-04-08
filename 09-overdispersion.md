@@ -317,8 +317,8 @@ summary(model.glmmTMB)
 Formula:          cbind(round, stretched) ~ condition + (1 | replicate)
 Data: cells2F
 
-     AIC      BIC   logLik deviance df.resid 
-    44.2     43.4    -18.1     36.2        2 
+      AIC       BIC    logLik -2*log(L)  df.resid 
+     44.2      43.4     -18.1      36.2         2 
 
 Random effects:
 
