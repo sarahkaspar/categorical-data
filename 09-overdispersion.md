@@ -250,7 +250,7 @@ Formula: cbind(round, stretched) ~ condition + (1 | replicate) + (1 |      obs)
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--0.83577 -0.02099  0.04574  0.12325  1.14415 
+-0.83577 -0.02100  0.04574  0.12325  1.14415 
 
 Random effects:
  Groups    Name        Variance Std.Dev.
