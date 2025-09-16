@@ -183,7 +183,7 @@ data.frame(pvals) %>%
 ```
 
 ``` output
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
 <img src="fig/06-power-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
