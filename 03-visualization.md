@@ -37,7 +37,7 @@ There is a very simple way to do this using base R:
 mosaicplot(mytable)
 ```
 
-<img src="fig/03-visualization-rendered-unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
+<img src="fig/03-visualization-rendered-unnamed-chunk-1-1.png" alt="" style="display: block; margin: auto;" />
 The **mosaic plot** consists of rectangles representing the contingency table's cells. The areas of the rectangles are proportional to the respective cells' count, making it easier for the human eye to compare the proportions.
 
 Note that the above mosaicplot is arranged such that the rectangles of one column are neatly stacked on top of each other. At the same time, it has flipped the table such that the rows of our matrix have become the columns and *vice versa*. 
@@ -61,7 +61,7 @@ If we apply the `mosaicplot` here, it'll look like this:
 mosaicplot(smokers)
 ```
 
-<img src="fig/03-visualization-rendered-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="fig/03-visualization-rendered-unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" />
 Using the argument `sort`, you can determine how the rectangles are aligned. You can align them by rows as follows: 
 
 ``` r
@@ -69,14 +69,14 @@ mosaicplot(smokers,
            sort = c(2,1))
 ```
 
-<img src="fig/03-visualization-rendered-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+<img src="fig/03-visualization-rendered-unnamed-chunk-3-1.png" alt="" style="display: block; margin: auto;" />
 Alternatively, you can run the plotting function on the *transposed* contingency table: 
 
 ``` r
 mosaicplot(t(smokers))
 ```
 
-<img src="fig/03-visualization-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="fig/03-visualization-rendered-unnamed-chunk-4-1.png" alt="" style="display: block; margin: auto;" />
 
 ## Using `ggplot2` 
 
@@ -132,7 +132,7 @@ mice %>%
   theme_void() 
 ```
 
-<img src="fig/03-visualization-rendered-tidy-mosaic-plot-1.png" style="display: block; margin: auto;" />
+<img src="fig/03-visualization-rendered-tidy-mosaic-plot-1.png" alt="" style="display: block; margin: auto;" />
 
 The above code is borrowed from [this post](https://stackoverflow.com/questions/19233365/how-to-create-a-marimekko-mosaic-plot-in-ggplot2).
 

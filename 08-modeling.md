@@ -481,7 +481,7 @@ tidy_data %>%
   geom_point()
 ```
 
-<img src="fig/08-modeling-rendered-unnamed-chunk-24-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-modeling-rendered-unnamed-chunk-24-1.png" alt="" style="display: block; margin: auto;" />
 It's normal that for lower counts, the fractions are jumping around more.
 For eyeballing purposes, it's therefore recommended to use stacked bar plots.
 
@@ -510,7 +510,8 @@ check_overdispersion(glm.binom.1var)
 ```
 
 ``` error
-Error: Package `DHARMa` required for this function to work.
+Error:
+! Package `DHARMa` required for this function to work.
   Please install it by running `install.packages("DHARMa")`.
 ```
 Or the one with the replicate included:
@@ -520,7 +521,8 @@ check_overdispersion(glm.binom.repl)
 ```
 
 ``` error
-Error: Package `DHARMa` required for this function to work.
+Error:
+! Package `DHARMa` required for this function to work.
   Please install it by running `install.packages("DHARMa")`.
 ```
 For our cell data, we are fine. 

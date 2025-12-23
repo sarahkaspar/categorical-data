@@ -186,7 +186,7 @@ data.frame(pvals) %>%
 `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-<img src="fig/06-power-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-power-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" />
 
 
 Unfortunately, for discrete data, this is not actually the case.
@@ -270,7 +270,7 @@ data.frame(p_vals) %>%
   geom_histogram()
 ```
 
-<img src="fig/06-power-rendered-unnamed-chunk-15-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-power-rendered-unnamed-chunk-15-1.png" alt="" style="display: block; margin: auto;" />
 In theory, the histogram should show a uniform distribution (the probability of getting a p-value $<0.05$ is $5\%$, the probability of getting a p-value $<0.1$ is $10\%$, and so on...). But here, instead, the p-values are *discrete*: They can only take certain values, because there's only a limited number of options how 25 observations can fall into two categories (dogs/cats). 
 
 Since for small counts, the chances to get a p-value $p<0.05$ are actually **below** 5% -- and this holds also for other values of $p$ which are not exactly $0.05$ -- we say that the Fisher test is **conservative**. It means that interpreting the discrete hypergeometric probabilities as continuous p-values will lead us to overestimated p-values. This also holds true when the null hypothesis is actually *false*, so we're reducing our chances to run a significant test, even if there's something to detect.

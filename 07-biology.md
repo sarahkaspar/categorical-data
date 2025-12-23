@@ -57,7 +57,7 @@ colnames(cell_shapes) <- c("round", "spiky", "stretched", "flat")
 mosaicplot(cell_shapes)
 ```
 
-<img src="fig/07-biology-rendered-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-biology-rendered-unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" />
 
 ::::::::::::::: challenge
 # For the brave
@@ -106,7 +106,7 @@ tidy_shapes %>%
   theme_void() 
 ```
 
-<img src="fig/07-biology-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-biology-rendered-unnamed-chunk-4-1.png" alt="" style="display: block; margin: auto;" />
 Looks much nicer, doesn't it?
 
 ::::::::::::::::::::::::::

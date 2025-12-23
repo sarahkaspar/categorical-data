@@ -190,7 +190,8 @@ check_overdispersion(binomial.model)
 ```
 
 ``` error
-Error: Package `DHARMa` required for this function to work.
+Error:
+! Package `DHARMa` required for this function to work.
   Please install it by running `install.packages("DHARMa")`.
 ```
 
@@ -205,7 +206,7 @@ cells2F %>%
   geom_point()
 ```
 
-<img src="fig/09-overdispersion-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/09-overdispersion-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 
 We should account for the overdispersion, to ensure the differences between control and treatment were not due to overdispersion. 
 
