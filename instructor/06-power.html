@@ -357,7 +357,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Categorical data and statistical power</h1>
-        <p>Last updated on 2025-12-16 |
+        <p>Last updated on 2025-12-23 |
 
         <a href="https://github.com/carpentries/workbench-template-rmd/edit/main/episodes/06-power.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -493,7 +493,7 @@ compare to the outcome of the <span class="math inline">\(\chi^2\)</span> test?<
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -641,7 +641,7 @@ uniform:</p>
 </h3>
 <pre class="output" tabindex="0"><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
-<figure><img src="../fig/06-power-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Unfortunately, for discrete data, this is not actually the case.</p>
+<figure><img src="../fig/06-power-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Unfortunately, for discrete data, this is not actually the case.</p>
 <p>The following simulation is an attempt to demonstrate this. Suppose
 we test the association between the preferred animal of a person (we
 give the choice between cat and dog), and their handedness. And let’s
@@ -742,7 +742,7 @@ simulation:</p>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">p_vals</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<p><img src="../fig/06-power-rendered-unnamed-chunk-15-1.png" style="display: block; margin: auto;" class="figure">
+<p><img src="../fig/06-power-rendered-unnamed-chunk-15-1.png" alt="" style="display: block; margin: auto;" class="figure">
 In theory, the histogram should show a uniform distribution (the
 probability of getting a p-value <span class="math inline">\(&lt;0.05\)</span> is <span class="math inline">\(5\%\)</span>, the probability of getting a p-value
 <span class="math inline">\(&lt;0.1\)</span> is <span class="math inline">\(10\%\)</span>, and so on…). But here, instead, the
@@ -848,8 +848,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-rmd/instructor/06-power.html",
   "identifier": "https://carpentries.github.io/workbench-template-rmd/instructor/06-power.html",
   "dateCreated": "2025-03-13",
-  "dateModified": "2025-12-16",
-  "datePublished": "2025-12-16"
+  "dateModified": "2025-12-23",
+  "datePublished": "2025-12-23"
 }
 
   </script><script>
