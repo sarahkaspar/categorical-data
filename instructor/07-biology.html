@@ -355,7 +355,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Complications with biological data</h1>
-        <p>Last updated on 2026-04-28 |
+        <p>Last updated on 2026-05-05 |
 
         <a href="https://github.com/carpentries/workbench-template-rmd/edit/main/episodes/07-biology.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -412,22 +412,22 @@ consistent across replicates.</li>
 applied on cultured cells, and individual cells are subsequently
 categorized into 4 mutually exclusive phenotypes. The resulting
 contingency table could look like this:</p>
-<table class="table"><thead><tr class="header"><th align="left"></th>
+<table class="table"><thead><tr><th align="left"></th>
 <th align="center">round</th>
 <th align="center">spiky</th>
 <th align="center">stretched</th>
 <th align="center">flat</th>
-</tr></thead><tbody><tr class="odd"><td align="left">treatment 1</td>
+</tr></thead><tbody><tr><td align="left">treatment 1</td>
 <td align="center">5</td>
 <td align="center">15</td>
 <td align="center">30</td>
 <td align="center">3</td>
-</tr><tr class="even"><td align="left">treatment 2</td>
+</tr><tr><td align="left">treatment 2</td>
 <td align="center">10</td>
 <td align="center">37</td>
 <td align="center">21</td>
 <td align="center">29</td>
-</tr><tr class="odd"><td align="left">treatment 3</td>
+</tr><tr><td align="left">treatment 3</td>
 <td align="center">1</td>
 <td align="center">40</td>
 <td align="center">0</td>
@@ -682,13 +682,13 @@ and a treatment are compared with respect to the phenotype composition
 of cells. In this experiment, there are only two possible phenotypes:
 round and stretched.</p>
 <p>A resulting table might look like this:</p>
-<table class="table"><thead><tr class="header"><th align="left"></th>
+<table class="table"><thead><tr><th align="left"></th>
 <th align="center">round</th>
 <th align="center">stretched</th>
-</tr></thead><tbody><tr class="odd"><td align="left">ctrl</td>
+</tr></thead><tbody><tr><td align="left">ctrl</td>
 <td align="center">9</td>
 <td align="center">39</td>
-</tr><tr class="even"><td align="left">trt</td>
+</tr><tr><td align="left">trt</td>
 <td align="center">21</td>
 <td align="center">42</td>
 </tr></tbody></table><p>This still looks familiar. But now, the biologist at work was
@@ -696,35 +696,35 @@ concerned about the reproducibiliy of the experiment, so she performed
 it three times. And as a result, we look at a 3-dimensional table, with
 the replicate as third dimension:</p>
 <table class="table kable_wrapper"><tbody><tr><td>
-<table class="table"><thead><tr class="header"><th align="left"></th>
+<table class="table"><thead><tr><th align="left"></th>
 <th align="center">round</th>
 <th align="center">stretched</th>
-</tr></thead><tbody><tr class="odd"><td align="left">ctrl</td>
+</tr></thead><tbody><tr><td align="left">ctrl</td>
 <td align="center">9</td>
 <td align="center">39</td>
-</tr><tr class="even"><td align="left">trt</td>
+</tr><tr><td align="left">trt</td>
 <td align="center">21</td>
 <td align="center">42</td>
 </tr></tbody></table></td>
 <td>
-<table class="table"><thead><tr class="header"><th align="left"></th>
+<table class="table"><thead><tr><th align="left"></th>
 <th align="center">round</th>
 <th align="center">stretched</th>
-</tr></thead><tbody><tr class="odd"><td align="left">ctrl</td>
+</tr></thead><tbody><tr><td align="left">ctrl</td>
 <td align="center">16</td>
 <td align="center">59</td>
-</tr><tr class="even"><td align="left">trt</td>
+</tr><tr><td align="left">trt</td>
 <td align="center">51</td>
 <td align="center">99</td>
 </tr></tbody></table></td>
 <td>
-<table class="table"><thead><tr class="header"><th align="left"></th>
+<table class="table"><thead><tr><th align="left"></th>
 <th align="center">round</th>
 <th align="center">stretched</th>
-</tr></thead><tbody><tr class="odd"><td align="left">ctrl</td>
+</tr></thead><tbody><tr><td align="left">ctrl</td>
 <td align="center">7</td>
 <td align="center">40</td>
-</tr><tr class="even"><td align="left">trt</td>
+</tr><tr><td align="left">trt</td>
 <td align="center">22</td>
 <td align="center">41</td>
 </tr></tbody></table></td>
@@ -1005,19 +1005,19 @@ calculates</p>
 </ul><p>taking the replicates into account.</p>
 <p>Let’s stay with the examples above:</p>
 <table class="table"><caption>replicate 1</caption>
-<tbody><tr class="odd"><td align="center">9</td>
+<tbody><tr><td align="center">9</td>
 <td align="center">39</td>
-</tr><tr class="even"><td align="center">21</td>
+</tr><tr><td align="center">21</td>
 <td align="center">42</td>
 </tr></tbody></table><table class="table"><caption>replicate 2</caption>
-<tbody><tr class="odd"><td align="center">16</td>
+<tbody><tr><td align="center">16</td>
 <td align="center">59</td>
-</tr><tr class="even"><td align="center">51</td>
+</tr><tr><td align="center">51</td>
 <td align="center">99</td>
 </tr></tbody></table><table class="table"><caption>replicate 3</caption>
-<tbody><tr class="odd"><td align="center">7</td>
+<tbody><tr><td align="center">7</td>
 <td align="center">40</td>
-</tr><tr class="even"><td align="center">22</td>
+</tr><tr><td align="center">22</td>
 <td align="center">41</td>
 </tr></tbody></table><p>We’d like to test whether the composition of cell types is
 <strong>independent</strong> of the treatment, and at the same time
@@ -1238,8 +1238,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-rmd/instructor/07-biology.html",
   "identifier": "https://carpentries.github.io/workbench-template-rmd/instructor/07-biology.html",
   "dateCreated": "2025-03-13",
-  "dateModified": "2026-04-28",
-  "datePublished": "2026-04-28"
+  "dateModified": "2026-05-05",
+  "datePublished": "2026-05-05"
 }
 
   </script><script>
