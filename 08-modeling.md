@@ -509,10 +509,16 @@ library(performance)
 check_overdispersion(glm.binom.1var)
 ```
 
-``` error
-Error:
-! Package `DHARMa` required for this function to work.
-  Please install it by running `install.packages("DHARMa")`.
+``` output
+# Overdispersion test
+
+       dispersion ratio = 21370.092
+  Pearson's Chi-Squared = 85480.370
+                p-value =   < 0.001
+```
+
+``` output
+Overdispersion detected.
 ```
 Or the one with the replicate included:
 
@@ -520,9 +526,15 @@ Or the one with the replicate included:
 check_overdispersion(glm.binom.repl)
 ```
 
-``` error
-Error:
-! Package `DHARMa` required for this function to work.
-  Please install it by running `install.packages("DHARMa")`.
+``` output
+# Overdispersion test
+
+       dispersion ratio = 42405.635
+  Pearson's Chi-Squared = 84811.269
+                p-value =   < 0.001
+```
+
+``` output
+Overdispersion detected.
 ```
 For our cell data, we are fine. 

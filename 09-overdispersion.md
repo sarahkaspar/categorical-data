@@ -189,10 +189,16 @@ library(performance)
 check_overdispersion(binomial.model)
 ```
 
-``` error
-Error:
-! Package `DHARMa` required for this function to work.
-  Please install it by running `install.packages("DHARMa")`.
+``` output
+# Overdispersion test
+
+       dispersion ratio =  50137.430
+  Pearson's Chi-Squared = 100274.860
+                p-value =    < 0.001
+```
+
+``` output
+Overdispersion detected.
 ```
 
 This test doesn't find sufficient evidence for overdispersion -- which doesn't mean it's not present. Overdispersion in this case means that on top of the between-replicate variability, the fractions vary on the observation level. It is hard to detect, because a lot of the variability will be attributed to the `replicate` variable in the model.     
