@@ -339,7 +339,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Overdispersed data</h1>
-        <p>Last updated on 2026-06-30 |
+        <p>Last updated on 2026-07-07 |
 
         <a href="https://github.com/carpentries/workbench-template-rmd/edit/main/episodes/09-overdispersion.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -412,7 +412,7 @@ different technicians.</p>
   click to expand
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -575,11 +575,18 @@ The Wald test for <code>conditiontrt</code> gives <span class="math inline">\(p 
 <span><span class="fu">check_overdispersion</span><span class="op">(</span><span class="va">binomial.model</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error:
-! Package `DHARMa` required for this function to work.
-  Please install it by running `install.packages("DHARMa")`.</code></pre>
+<pre class="output" tabindex="0"><code># Overdispersion test
+
+       dispersion ratio =  50137.430
+  Pearson's Chi-Squared = 100274.860
+                p-value =    &lt; 0.001</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Overdispersion detected.</code></pre>
 </div>
 <p>This test doesn’t find sufficient evidence for overdispersion – which
 doesn’t mean it’s not present. Overdispersion in this case means that on
@@ -588,7 +595,7 @@ observation level. It is hard to detect, because a lot of the
 variability will be attributed to the <code>replicate</code> variable in
 the model.</p>
 <p>We can check visually:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -609,7 +616,7 @@ between control and treatment were not due to overdispersion.</p>
 <p>Fit linear model with random effect replicate observation level
 (OLRE). This is accounting for unmodeled, random variability at the
 observation level (replicate).</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -626,7 +633,7 @@ fractions.</li>
 <code>(1|replicate:condition)</code>: observation-level random
 effect (fractions are allowed additional variability within the
 replicates)</li>
-</ul><div class="codewrapper sourceCode" id="cb14">
+</ul><div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -696,14 +703,14 @@ b_i)\)</span></p>
 </div>
 </div>
 <p>Load required library:</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">glmmTMB</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Set up the model and look at the summary:</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -711,7 +718,7 @@ b_i)\)</span></p>
 <span>                            family<span class="op">=</span><span class="fu">betabinomial</span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span>,</span>
 <span>                            data<span class="op">=</span><span class="va">cells2F</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -827,8 +834,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-rmd/instructor/09-overdispersion.html",
   "identifier": "https://carpentries.github.io/workbench-template-rmd/instructor/09-overdispersion.html",
   "dateCreated": "2025-03-13",
-  "dateModified": "2026-06-30",
-  "datePublished": "2026-06-30"
+  "dateModified": "2026-07-07",
+  "datePublished": "2026-07-07"
 }
 
   </script><script>

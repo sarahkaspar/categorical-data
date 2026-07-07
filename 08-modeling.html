@@ -339,7 +339,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Modeling count data</h1>
-        <p>Last updated on 2026-06-30 |
+        <p>Last updated on 2026-07-07 |
 
         <a href="https://github.com/carpentries/workbench-template-rmd/edit/main/episodes/08-modeling.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -929,25 +929,39 @@ overdispersion:</p>
 <span><span class="fu">check_overdispersion</span><span class="op">(</span><span class="va">glm.binom.1var</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error:
-! Package `DHARMa` required for this function to work.
-  Please install it by running `install.packages("DHARMa")`.</code></pre>
+<pre class="output" tabindex="0"><code># Overdispersion test
+
+       dispersion ratio = 21370.092
+  Pearson's Chi-Squared = 85480.370
+                p-value =   &lt; 0.001</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Overdispersion detected.</code></pre>
 </div>
 <p>Or the one with the replicate included:</p>
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">check_overdispersion</span><span class="op">(</span><span class="va">glm.binom.repl</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error:
-! Package `DHARMa` required for this function to work.
-  Please install it by running `install.packages("DHARMa")`.</code></pre>
+<pre class="output" tabindex="0"><code># Overdispersion test
+
+       dispersion ratio = 42405.635
+  Pearson's Chi-Squared = 84811.269
+                p-value =   &lt; 0.001</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Overdispersion detected.</code></pre>
 </div>
 <p>For our cell data, we are fine.</p>
 <!--
@@ -1019,8 +1033,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-rmd/08-modeling.html",
   "identifier": "https://carpentries.github.io/workbench-template-rmd/08-modeling.html",
   "dateCreated": "2025-03-13",
-  "dateModified": "2026-06-30",
-  "datePublished": "2026-06-30"
+  "dateModified": "2026-07-07",
+  "datePublished": "2026-07-07"
 }
 
   </script><script>
