@@ -512,13 +512,13 @@ check_overdispersion(glm.binom.1var)
 ``` output
 # Overdispersion test
 
-       dispersion ratio = 21370.092
-  Pearson's Chi-Squared = 85480.370
-                p-value =   < 0.001
+       dispersion ratio = 0.205
+  Pearson's Chi-Squared = 0.820
+                p-value = 0.936
 ```
 
 ``` output
-Overdispersion detected.
+No overdispersion detected.
 ```
 Or the one with the replicate included:
 
@@ -529,12 +529,12 @@ check_overdispersion(glm.binom.repl)
 ``` output
 # Overdispersion test
 
-       dispersion ratio = 42405.635
-  Pearson's Chi-Squared = 84811.269
-                p-value =   < 0.001
+       dispersion ratio = 0.333
+  Pearson's Chi-Squared = 0.665
+                p-value = 0.717
 ```
 
 ``` output
-Overdispersion detected.
+No overdispersion detected.
 ```
 For our cell data, we are fine. 

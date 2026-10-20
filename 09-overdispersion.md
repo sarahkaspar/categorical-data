@@ -192,9 +192,9 @@ check_overdispersion(binomial.model)
 ``` output
 # Overdispersion test
 
-       dispersion ratio =  50137.430
-  Pearson's Chi-Squared = 100274.860
-                p-value =    < 0.001
+       dispersion ratio =  5.486
+  Pearson's Chi-Squared = 10.973
+                p-value =  0.004
 ```
 
 ``` output
