@@ -257,24 +257,24 @@ Formula: cbind(round, stretched) ~ condition + (1 | replicate) + (1 |      obs)
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--0.83577 -0.02100  0.04574  0.12325  1.14415 
+-0.83572 -0.02083  0.04592  0.12328  1.14407 
 
 Random effects:
  Groups    Name        Variance Std.Dev.
- obs       (Intercept) 0.4256   0.6523  
+ obs       (Intercept) 0.4256   0.6524  
  replicate (Intercept) 0.1388   0.3725  
 Number of obs: 6, groups:  obs, 6; replicate, 3
 
 Fixed effects:
              Estimate Std. Error z value Pr(>|z|)  
-(Intercept)   -0.9341     0.5184  -1.802   0.0715 .
-conditiontrt  -0.9657     0.6547  -1.475   0.1402  
+(Intercept)   -0.9341     0.5188  -1.800   0.0718 .
+conditiontrt  -0.9660     0.6563  -1.472   0.1411  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr)
-conditintrt -0.660
+conditintrt -0.659
 ```
 
 The OLRE model estimates a variance for both random effects. Note that it attributes the majority of the variance to the observations, not the replicate. This implies that obser
